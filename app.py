@@ -10,7 +10,8 @@ db = {
     "host":"localhost",
     "user":"root",
     "password":"123qwe",
-    "database":"taipeitour_website"
+    "database":"taipeitour_website",
+	"ssl_disabled": True
 }
 pool = pooling.MySQLConnectionPool(pool_name="pool", pool_size=5, **db)
 connection=pool.get_connection()
