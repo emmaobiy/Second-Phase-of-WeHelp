@@ -18,7 +18,7 @@ async def get_attractions(page:int=0, keyword: Optional[str] = None):
                 FROM attractions a
                 LEFT JOIN attractionsmrt m ON a.attractionsmrt_id = m.id
                 LEFT JOIN attractionscat c ON a.attractionscat_id = c.id
-                LEFT JOIN attractionsImages i ON a.id = i.attractions_id          
+                LEFT JOIN attractionsimages i ON a.id = i.attractions_id          
         """ 
         # 搜尋條件
         if keyword:
@@ -69,7 +69,7 @@ async def get_attraction_by_id(attractionId:int):
                 FROM attractions a
                 LEFT JOIN attractionsmrt m ON a.attractionsmrt_id = m.id
                 LEFT JOIN attractionscat c ON a.attractionscat_id = c.id
-                LEFT JOIN attractionsImages i ON a.id = i.attractions_id
+                LEFT JOIN attractionsimages i ON a.id = i.attractions_id
                 WHERE a.id=%s
                 GROUP BY a.id          
         """ 

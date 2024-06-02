@@ -42,8 +42,8 @@ cursor.execute("""CREATE TABLE attractions (
                 FOREIGN KEY (attractionsmrt_id) REFERENCES attractionsmrt(id));
                """)
 
-#create TABLE attractionsImages 
-cursor.execute("""CREATE TABLE attractionsImages(
+#create TABLE attractionsimages 
+cursor.execute("""CREATE TABLE attractionsimages(
               id INT AUTO_INCREMENT PRIMARY KEY, 
               attractions_id INT,
               image_url TEXT NOT NULL,
@@ -117,11 +117,11 @@ def insert_data():
             urls_list =re.findall(r'https?://[^\s]+?\.(?:JPG|jpg|PNG|png)', image_urls)
             return urls_list
 
-        #insert attractionsImages 資料表
+        #insert attractionsimages 資料表
         urls = extract_urls_from_images(image_urls)
                 
         for url in urls:
-            cursor.execute("""INSERT INTO attractionsImages (attractions_id, image_url) VALUES (%s, %s)""", (attractions_id, url))
+            cursor.execute("""INSERT INTO attractionsimages (attractions_id, image_url) VALUES (%s, %s)""", (attractions_id, url))
  
     connection.commit()
     cursor.close()
