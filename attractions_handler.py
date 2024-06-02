@@ -44,7 +44,7 @@ async def get_attractions(page:int=0, keyword: Optional[str] = None):
         else:
             paginated_attractions = attractions[offset:offset+limit]
             total_pages = (len(attractions) - 1) // limit + 1  
-            next_page = page + 1 if page < total_pages else None 
+            next_page = page + 1 if page < total_pages * limit < len(attractions) else None
 
             json_data={
                  "nextpage":next_page,

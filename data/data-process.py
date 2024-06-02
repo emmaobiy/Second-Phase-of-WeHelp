@@ -6,7 +6,7 @@ db = {
     "host":"localhost",
     "user":"root",
     "password":"123qwe",
-    "database":"taipeitourd_website"
+    "database":"taipeitour_website"
 }
 pool = pooling.MySQLConnectionPool(pool_name="pool", pool_size=5, **db)
 connection=pool.get_connection()
