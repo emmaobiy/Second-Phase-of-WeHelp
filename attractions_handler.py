@@ -23,7 +23,7 @@ async def get_attractions(page:int=0, keyword: Optional[str] = None):
         # 搜尋條件
         if keyword:
             query+= "WHERE a.name LIKE %s OR m.mrt=%s GROUP BY a.id"
-            cursor.execute(query,  ('%' + keyword + '%', '%' + keyword + '%'))
+            cursor.execute(query,  ('%' + keyword + '%', keyword))
 
         else:
             query+= "GROUP BY a.id"
