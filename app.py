@@ -2,7 +2,7 @@ from fastapi import *
 from fastapi.responses import FileResponse,JSONResponse
 from typing import Optional
 from mysql.connector import pooling
-from get_attractions import get_attraction_by_id, get_attractions, get_mrt_list
+from attractions_handler import get_attraction_by_id, get_attractions, get_mrt_list
 
 app=FastAPI()
 
