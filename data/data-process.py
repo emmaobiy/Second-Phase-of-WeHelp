@@ -12,34 +12,34 @@ pool = pooling.MySQLConnectionPool(pool_name="pool", pool_size=5, **db)
 connection=pool.get_connection()
 cursor=connection.cursor()
 
-#create TABLE attractionsCAT
-cursor.execute("""CREATE TABLE attractionsCAT (
+#create TABLE attractionscat
+cursor.execute("""CREATE TABLE attractionscat (
                id INT AUTO_INCREMENT PRIMARY KEY,
-               CAT VARCHAR(255) UNIQUE
+               cat VARCHAR(255) UNIQUE
 );""")
 
-#create TABLE attractionsMRT
-cursor.execute("""CREATE TABLE attractionsMRT (
+#create TABLE attractionsmrt
+cursor.execute("""CREATE TABLE attractionsmrt (
                id INT AUTO_INCREMENT PRIMARY KEY,
-               MRT VARCHAR(255) UNIQUE);
+               mrt VARCHAR(255) UNIQUE);
                """)
 
 #create TABLE attractions
 cursor.execute("""CREATE TABLE attractions (
                 id INT AUTO_INCREMENT PRIMARY KEY ,
-                SERIAL_NO BIGINT NOT NULL,
+                serial_no BIGINT NOT NULL,
                 name VARCHAR(255) NOT NULL,
                 address VARCHAR(255) NOT NULL,
-                attractionsCAT_id INT ,
-                attractionsMRT_id INT,
+                attractionscat_id INT ,
+                attractionsmrt_id INT,
                 MEMO_TIME varchar(500),
                 transport VARCHAR(2000),
                 description VARCHAR(2000),
                 rate INT,
                 longitude float NOT NULL,
                 latitude float NOT NULL,            
-                FOREIGN KEY (attractionsCAT_id) REFERENCES attractionsCAT(id),
-                FOREIGN KEY (attractionsMRT_id) REFERENCES attractionsMRT(id));
+                FOREIGN KEY (attractionscat_id) REFERENCES attractionscat(id),
+                FOREIGN KEY (attractionsmrt_id) REFERENCES attractionsmrt(id));
                """)
 
 #create TABLE attractionsImages 
@@ -60,12 +60,12 @@ def load_data():
 def insert_data():
     data=load_data()
     for item in data:    
-        SERIAL_NO = item.get("SERIAL_NO")
+        serial_no = item.get("SERIAL_NO")
         name = item.get("name")
         address = item.get("address")
-        CAT = item.get("CAT")
-        MRT = item.get("MRT",'')
-        MEMO_TIME = item.get("MEMO_TIME",'')
+        cat = item.get("CAT")
+        mrt = item.get("MRT",'')
+        memo_time = item.get("MEMO_TIME",'')
         transport=item.get("direction")
         description = item.get("description")
         rate = item.get("rate")
@@ -76,37 +76,37 @@ def insert_data():
 
         print("Inserting data for:", name) 
 
-        # insert attractionsCAT 資料表
-        if CAT:
-            cursor.execute("""INSERT IGNORE INTO attractionsCAT (CAT) VALUES (%s)""", (CAT,))
-            cursor.execute("SELECT id FROM attractionsCAT WHERE CAT = %s", (CAT,))
+        # insert attractionscat 資料表
+        if cat:
+            cursor.execute("""INSERT IGNORE INTO attractionscat (cat) VALUES (%s)""", (cat,))
+            cursor.execute("SELECT id FROM attractionscat WHERE cat = %s", (cat,))
             cat_row=cursor.fetchone()       
-            attractionsCAT_id=cat_row[0] 
+            attractionscat_id=cat_row[0] 
         else:
-            attractionsCAT_id=None
+            attractionscat_id=None
 
-        # insert attractionsMRT 資料表
-        if MRT:
-            cursor.execute("""INSERT IGNORE INTO attractionsMRT (MRT) VALUES (%s)""", (MRT,))
-            cursor.execute("SELECT id FROM attractionsMRT WHERE MRT = %s", (MRT,))
+        # insert attractionsmrt 資料表
+        if mrt:
+            cursor.execute("""INSERT IGNORE INTO attractionsmrt (mrt) VALUES (%s)""", (mrt,))
+            cursor.execute("SELECT id FROM attractionsmrt WHERE mrt = %s", (mrt,))
             mrt_row=cursor.fetchone()
-            attractionsMRT_id=mrt_row[0] if mrt_row else None
+            attractionsmrt_id=mrt_row[0] if mrt_row else None
         else:
-            attractionsMRT_id=None
+            attractionsmrt_id=None
 
 
-        # 檢查資料庫中是否已存在相同 SERIAL_NO 的資料
-        cursor.execute("SELECT COUNT(*) FROM attractions WHERE SERIAL_NO = %s", (SERIAL_NO,))
+        # 檢查資料庫中是否已存在相同 serial_no 的資料
+        cursor.execute("SELECT COUNT(*) FROM attractions WHERE serial_no = %s", (serial_no,))
         result=cursor.fetchone()
         if result[0] > 0:
-            print(f"SERIAL_NO {SERIAL_NO} 已經存在資料表中")
+            print(f"serial_no {serial_no} 已經存在資料表中")
         
         else:
             # insert attractions 資料表    
             cursor.execute("""
-            INSERT INTO attractions (SERIAL_NO, name, address, attractionsCAT_id, attractionsMRT_id, MEMO_TIME, transport, description, rate, longitude, latitude)
+            INSERT INTO attractions (serial_no, name, address, attractionscat_id, attractionsmrt_id, MEMO_TIME, transport, description, rate, longitude, latitude)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """, (SERIAL_NO, name, address,  attractionsCAT_id, attractionsMRT_id, MEMO_TIME, transport, description, rate, longitude, latitude,))
+            """, (serial_no, name, address,  attractionscat_id, attractionsmrt_id, memo_time, transport, description, rate, longitude, latitude,))
     
    
         # 取得插入資料的ID

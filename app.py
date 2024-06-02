@@ -59,8 +59,8 @@ async def API_get_attracion_by_id(attractionId:int):
 async def API_get_mrt_list():
     
 	try:
-		MRTlist=await get_mrt_list()
-		return MRTlist
+		mrtlist=await get_mrt_list()
+		return mrtlist
       
 	except Exception as e:
 		print("An error occurred while fetching data:", e)

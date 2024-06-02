@@ -13,11 +13,11 @@ async def get_attractions(page:int=0, keyword: Optional[str] = None):
     try:
         query="""
             SELECT a.id, a.name, a.description, a.address, a.transport, 
-                a.longitude, a.latitude, m.mrt, c.CAT, 
+                a.longitude, a.latitude, m.mrt, c.cat, 
                 JSON_ARRAYAGG(i.image_url) AS images
                 FROM attractions a
-                LEFT JOIN attractionsMRT m ON a.attractionsMRT_id = m.id
-                LEFT JOIN attractionsCAT c ON a.attractionsCAT_id = c.id
+                LEFT JOIN attractionsmrt m ON a.attractionsmrt_id = m.id
+                LEFT JOIN attractionscat c ON a.attractionscat_id = c.id
                 LEFT JOIN attractionsImages i ON a.id = i.attractions_id          
         """ 
         # 搜尋條件
@@ -44,7 +44,7 @@ async def get_attractions(page:int=0, keyword: Optional[str] = None):
         else:
             paginated_attractions = attractions[offset:offset+limit]
             total_pages = (len(attractions) - 1) // limit + 1  
-            next_page = page + 1 if page < total_pages * limit < len(attractions) else None
+            next_page = page + 1 if offset + limit < len(attractions) else None
 
             json_data={
                  "nextpage":next_page,
@@ -64,11 +64,11 @@ async def get_attraction_by_id(attractionId:int):
     try:
         query="""
             SELECT a.id, a.name, a.description, a.address, a.transport, 
-                a.longitude, a.latitude, m.mrt, c.CAT, 
+                a.longitude, a.latitude, m.mrt, c.cat, 
                 JSON_ARRAYAGG(i.image_url) AS images
                 FROM attractions a
-                LEFT JOIN attractionsMRT m ON a.attractionsMRT_id = m.id
-                LEFT JOIN attractionsCAT c ON a.attractionsCAT_id = c.id
+                LEFT JOIN attractionsmrt m ON a.attractionsmrt_id = m.id
+                LEFT JOIN attractionscat c ON a.attractionscat_id = c.id
                 LEFT JOIN attractionsImages i ON a.id = i.attractions_id
                 WHERE a.id=%s
                 GROUP BY a.id          
@@ -94,8 +94,8 @@ async def get_mrt_list():
     cursor = connection.cursor(dictionary=True)
         
     try:
-        query="""SELECT m.mrt FROM attractionsMRT m
-                LEFT JOIN attractions a ON a.attractionsMRT_id = m.id
+        query="""SELECT m.mrt FROM attractionsmrt m
+                LEFT JOIN attractions a ON a.attractionsmrt_id = m.id
                 GROUP BY m.mrt
                 ORDER BY COUNT(a.id) DESC
             """
