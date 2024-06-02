@@ -32,7 +32,7 @@ cursor.execute("""CREATE TABLE attractions (
                 address VARCHAR(255) NOT NULL,
                 attractionscat_id INT ,
                 attractionsmrt_id INT,
-                MEMO_TIME varchar(500),
+                memo_time varchar(500),
                 transport VARCHAR(2000),
                 description VARCHAR(2000),
                 rate INT,
@@ -104,7 +104,7 @@ def insert_data():
         else:
             # insert attractions 資料表    
             cursor.execute("""
-            INSERT INTO attractions (serial_no, name, address, attractionscat_id, attractionsmrt_id, MEMO_TIME, transport, description, rate, longitude, latitude)
+            INSERT INTO attractions (serial_no, name, address, attractionscat_id, attractionsmrt_id, memo_time, transport, description, rate, longitude, latitude)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """, (serial_no, name, address,  attractionscat_id, attractionsmrt_id, memo_time, transport, description, rate, longitude, latitude,))
     
