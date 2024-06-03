@@ -14,7 +14,7 @@ async def get_attractions(page:int=0, keyword: Optional[str] = None):
         query="""
             SELECT a.id, a.name, a.description, a.address, a.transport, 
                 a.longitude, a.latitude, m.mrt, c.cat, 
-                JSON_ARRAYAGG(i.image_url) AS images
+                GROUP_CONCAT(i.image_url SEPARATOR ',') AS images
                 FROM attractions a
                 LEFT JOIN attractionsmrt m ON a.attractionsmrt_id = m.id
                 LEFT JOIN attractionscat c ON a.attractionscat_id = c.id
@@ -31,7 +31,8 @@ async def get_attractions(page:int=0, keyword: Optional[str] = None):
         
         # 取得所有符合條件的景點資料
         attractions = cursor.fetchall()
-        print(len(attractions))
+        for attraction in attractions:
+            attraction['images']=attraction['images'].split(',')
 
 
         # 處理資料是否分頁
@@ -43,11 +44,11 @@ async def get_attractions(page:int=0, keyword: Optional[str] = None):
         
         else:
             paginated_attractions = attractions[offset:offset+limit]
-            total_pages = (len(attractions) - 1) // limit + 1  
-            next_page = page + 1 if offset + limit < len(attractions) else None
+            # total_pages = (len(attractions) - 1) // limit + 1  
+            nextPage = page + 1 if offset + limit < len(attractions) else None
 
             json_data={
-                 "nextpage":next_page,
+                 "nextPage":nextPage,
                  "data":paginated_attractions
             }
             return JSONResponse(content=json_data)
@@ -65,7 +66,7 @@ async def get_attraction_by_id(attractionId:int):
         query="""
             SELECT a.id, a.name, a.description, a.address, a.transport, 
                 a.longitude, a.latitude, m.mrt, c.cat, 
-                JSON_ARRAYAGG(i.image_url) AS images
+                GROUP_CONCAT(i.image_url SEPARATOR ',') AS images
                 FROM attractions a
                 LEFT JOIN attractionsmrt m ON a.attractionsmrt_id = m.id
                 LEFT JOIN attractionscat c ON a.attractionscat_id = c.id
@@ -75,8 +76,8 @@ async def get_attraction_by_id(attractionId:int):
         """ 
         cursor.execute(query, (attractionId,))
         attraction = cursor.fetchone()  
+        attraction['images']=attraction['images'].split(',')
   
-
         if not attraction:
             return JSONResponse(status_code=400, content={"error": True, "message": "景點編號不正確"})
         else:
