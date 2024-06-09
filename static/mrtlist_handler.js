@@ -7,7 +7,7 @@ async function fetchMRTList(){
         const data=await response.json();
         renderMRTList(data.data);
     } catch (error) {
-        console.error('An error occurred while fetching MRT list:', error);
+        console.error('MRT列表獲取失敗:', error);
     }
 }
 
