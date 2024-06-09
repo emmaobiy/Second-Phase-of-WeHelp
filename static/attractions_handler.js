@@ -13,10 +13,7 @@ async function fetchAttractions(){
             } else {
                 page=data.nextPage;
             }
-        } else {
-            console.error('查無景點資料');
-        }
-
+        } 
     }catch (error) {
         console.error('景點資料獲取失敗:', error);
     }
@@ -24,6 +21,10 @@ async function fetchAttractions(){
 
 function addAttraction(attractions) {
     const Container=document.getElementById('attractions-container');
+    if (!attractions || attractions.length === 0) {
+        console.error('查無景點資料');
+        return;
+    }
     for (let i=0; i < attractions.length; i++) {
         const attraction=attractions[i];
         const attractionExists=Container.querySelector(`[data-id="${attraction.id}"]`);
@@ -69,8 +70,9 @@ function addAttraction(attractions) {
 
             Container.appendChild(eachAttraction);
         };
-    }    
-}
+    }
+}    
+
 
 function handleScroll(){
     const scrollTop=(document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
