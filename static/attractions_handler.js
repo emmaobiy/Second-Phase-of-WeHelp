@@ -3,15 +3,19 @@ let keyword='';
 
 
 async function fetchAttractions(){
-    const response=await fetch(`/api/attractions?page=${page}&keyword=${keyword}`);
-        const data=await response.json();
-        addAttraction(data.data);
-        if (data.nextPage===null){
-            window.removeEventListener('scroll', handleScroll);
-        } else {
-            page=data.nextPage;
-        }
+    try{
+        const response=await fetch(`/api/attractions?page=${page}&keyword=${keyword}`);
+            const data=await response.json();
+            addAttraction(data.data);
+            if (data.nextPage===null){
+                window.removeEventListener('scroll', handleScroll);
+            } else {
+                page=data.nextPage;
+            }
+    }catch (error) {
+        console.error('Error fetching attractions:', error);
     }
+}
 
 function addAttraction(attractions) {
     const Container=document.getElementById('attractions-container');
