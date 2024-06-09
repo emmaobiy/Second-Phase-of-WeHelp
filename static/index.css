@@ -1,0 +1,321 @@
+body{
+    background-color: white;
+    font-family: "Noto Sans TC", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* 導覽列容器 */
+.navigation-container{
+    width: 100%; 
+    height: 54px;
+
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */  
+}
+
+/* 導覽列文字區塊最大寬度 */
+.nav-min-container{
+    width: 1200px;
+    height: 34px;
+    padding: 10px;
+    display: flex;
+    align-items: center; /* 垂直居中 */  
+    justify-content: space-between; /* 左右側 */
+}
+
+/* 導覽列右側 */
+.nav-right{
+    display: flex; 
+}
+
+/* 導覽列右側選項 */
+.nav-button{
+    padding: 10px;
+}
+
+/* 主圖區塊容器 */
+.hero-section{
+    height: 320px; 
+    background-image: url('./images/image-background.png');
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;    
+
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+/* 主圖文字區容器 */
+.hero-content{
+    width: 1200px;
+    height: 169px;
+    padding: 10px;
+    text-align: left;
+}
+
+.hero-slogan{
+    padding:0px;
+    margin: 20px;
+}
+
+.hero-search{
+    display:flex;
+    height: 46px;
+    padding: 0px;
+    margin: 20px;
+
+}
+
+/* 主圖輸入框 */
+.hero-input{
+    width: 400px;
+    height: 46px;
+    padding: 0px 0px 0px 10px;
+    margin: 0px;
+    border: none;
+    border-radius: 5px 0px 0px 5px;   
+}
+
+.hero-input::placeholder{
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #666666;
+}
+
+
+.hero-button{
+    background-image: url('./images/icon-search.png');
+    background-color: #448899;
+    width: 60px;
+    height: 46px;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    border-radius: 0px 5px 5px 0px;  
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: 30px 30px; 
+    
+}
+
+/* 主內容區塊容器 */
+.main-container{
+    width: 100%;
+    margin:0px;
+    padding: 40px, 0px, 40px, 0px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 主內容區塊1-mrt-list */
+.mrt-list-container{
+    background-color:white;
+    width: 100%;
+    max-width: 1200px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.mrt-list{
+    Width:1106px;
+    height:50px;
+    Padding:13px 10px;
+    display: flex;
+    align-items: center;
+    overflow-x: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+}
+
+.mrt-station{
+    Padding:5px 15px 5px 15px;
+}
+
+.mrt-list-button-left{
+    width: 47px;
+    height: 50px;
+    padding: 9px 0px 9px 15px;
+    margin: 0px;
+    border: none;
+
+    background-image: url('./images/icon-arrow-left-hovered.png');
+    background-color:white;
+    background-size: 32px 32px; 
+    background-position: right; 
+    background-repeat: no-repeat;
+}
+
+.mrt-list-button-right{
+    width: 47px;
+    height: 50px;
+    padding: 9px 15px 9px 0px;
+    margin: 0px;
+    border: none;
+
+    background-image: url('./images/icon-arrow-right-hovered.png');
+    background-color:white;
+    background-size: 32px 32px; 
+    background-position: left;
+    background-repeat: no-repeat;
+}
+
+
+
+/* 主內容區塊2-attractions */
+.attractions-container{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0px;
+    padding: 0px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.each-attraction{
+    width: 270px;
+    height: 242px;
+    margin: 15px;
+    padding: 0px;
+    border: 1px solid #E8E8E8;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.attraction-imgContainer{
+    position:relative;
+    width: 270px;
+    height: 197px;
+}
+
+.attraction-imgContainer img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* 景點名稱 */
+.attraction-name{
+    position: absolute;
+    width: 250px;
+    height: 25px;
+    padding: 10px;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明的黑色背景 */
+
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* 防止文字换行 */
+    overflow: hidden; /* 防止文字溢出 */
+    text-overflow: ellipsis; /* 文字溢出时使用省略号 */
+}
+  
+/* MRT 與 CAT  */
+.attraction-info{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.info-mrt{
+    flex: 1;
+    height: 45px;
+    text-align: left;
+}
+
+.info-cat{
+    flex: 1;
+    height: 45px;
+    text-align: right; 
+}
+
+
+/* Footer */
+.footer{
+    width:100%;
+    height: 104px;
+    background-color: #757575;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+
+.font-header1-bold30{
+    font-size: 30px;
+    font-weight: 700;
+    color: #448899;
+}
+
+.font-header2-bold28{
+    font-size: 28px;
+    font-weight: 700;
+    color: #F8F8F8;
+}
+
+.font-body-med16-gray{
+    font-size: 16px;
+    font-weight: 500;
+    color: #666666;
+}
+.font-body-bold16-white{
+    font-size: 16px;
+    font-weight: 700;
+    color: #F8F8F8;
+}
+
+
+
+@media screen and (max-width: 600px) {
+    .nav-min-container{
+        width: 360px;
+    }
+      
+    .hero-content{
+        width: 340px;
+        height: 169px;
+    }
+    
+    .hero-input{
+        width: 285px;
+    }
+    
+    .mrt-list-container{
+        max-width: 360px;
+    }
+    
+    .mrt-list{
+        Width:266px;
+    }
+    
+    .attractions-container{
+        max-width: 360px;
+    }
+    
+    .each-attraction{
+        width: 322px;
+        height: 280px;
+    }
+    
+    .attraction-imgContainer{
+        width: 322px;
+        height: 235px;
+    }
+    
+    .attraction-name{
+        width: 302px;
+        height: 20px;
+    }
+    
+}
