@@ -4,61 +4,64 @@ let keyword='';
 
 async function fetchAttractions(){
     const response=await fetch(`/api/attractions?page=${page}&keyword=${keyword}`);
-    const data=await response.json();
-    addAttraction(data.data);
-    if (data.nextPage===null){
-        window.removeEventListener('scroll', handleScroll);
-    } else {
-        page=data.nextPage;
+        const data=await response.json();
+        addAttraction(data.data);
+        if (data.nextPage===null){
+            window.removeEventListener('scroll', handleScroll);
+        } else {
+            page=data.nextPage;
+        }
     }
-}
 
 function addAttraction(attractions) {
     const Container=document.getElementById('attractions-container');
 
     for (let i=0; i < attractions.length; i++) {
         const attraction=attractions[i];
+        const attractionExists=Container.querySelector(`[data-id="${attraction.id}"]`);
+        if (!attractionExists) {
+            // each-attraction
+            const eachAttraction=document.createElement('div');
+            eachAttraction.classList.add('each-attraction');
+            eachAttraction.setAttribute('data-id', attraction.id);
+            
+            // attraction-imgContainer
+            const imgContainer=document.createElement('div');
+            imgContainer.classList.add('attraction-imgContainer');
+            
+            // img
+            const img=document.createElement('img');
+            img.src=attraction.images[0];
+            img.alt=attraction.name;
         
-        // each-attraction
-        const eachAttraction=document.createElement('div');
-        eachAttraction.classList.add('each-attraction');
-        
-        // attraction-imgContainer
-        const imgContainer=document.createElement('div');
-        imgContainer.classList.add('attraction-imgContainer');
-        
-        // img
-        const img=document.createElement('img');
-        img.src=attraction.images[0];
-        img.alt=attraction.name;
-       
-        // attraction-name
-        const name=document.createElement('div');
-        name.classList.add('attraction-name', 'font-body-bold16-white');
-        name.textContent=attraction.name;
+            // attraction-name
+            const name=document.createElement('div');
+            name.classList.add('attraction-name', 'font-body-bold16-white');
+            name.textContent=attraction.name;
 
-        imgContainer.appendChild(name);
-        imgContainer.appendChild(img);
-        eachAttraction.appendChild(imgContainer);
+            imgContainer.appendChild(name);
+            imgContainer.appendChild(img);
+            eachAttraction.appendChild(imgContainer);
 
-        // attraction-info
-        const info=document.createElement('div');
-        info.classList.add('attraction-info');
+            // attraction-info
+            const info=document.createElement('div');
+            info.classList.add('attraction-info');
+            
+            const mrt=document.createElement('div');
+            mrt.classList.add('info-mrt','font-body-med16-gray');
+            mrt.textContent=attraction.mrt;
+            
+            const cat=document.createElement('div');
+            cat.classList.add('info-cat', 'font-body-med16-gray');
+            cat.textContent=attraction.cat;
         
-        const mrt=document.createElement('div');
-        mrt.classList.add('info-mrt','font-body-med16-gray');
-        mrt.textContent=attraction.mrt;
-        
-        const cat=document.createElement('div');
-        cat.classList.add('info-cat', 'font-body-med16-gray');
-        cat.textContent=attraction.cat;
-       
-        info.appendChild(mrt);
-        info.appendChild(cat);
-        eachAttraction.appendChild(info);
+            info.appendChild(mrt);
+            info.appendChild(cat);
+            eachAttraction.appendChild(info);
 
-        Container.appendChild(eachAttraction);
-    };
+            Container.appendChild(eachAttraction);
+        };
+    }
 }
 
 function handleScroll(){
