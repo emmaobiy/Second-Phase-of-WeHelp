@@ -4,8 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Index</title>
+  <link rel="stylesheet" type="text/css"  href="/static/index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap">
 </head>
+
 <body>
+<!-- navigation -->
+    <nav class="navigation-container">
+      <nav class="nav-min-container font-header1-bold30">台北一日遊
+        
+        <div class="nav-right">
+          <div class="nav-button font-body-med16-gray" id="reservation">預定行程</div>
+          <div class="nav-button font-body-med16-gray" id="login-signup">登入/註冊</div>
+        </div>
+      </nav>
+    </nav>   
+
+<!-- hero section -->
+    <section class="hero-section">
+      <div class="hero-content">
+
+        <div class="hero-slogan font-header2-bold28">輕鬆享受台北一日悠閒</div>
+        <div class="hero-slogan font-body-bold16-white">探索每個角落，體驗城市的深度旅遊行程</div>
+      
+        <form id="searchForm" class="hero-search">
+          <input type="text" id="keyword" class="hero-input" placeholder="輸入景點名稱查詢">
+          <button type="submit" class="hero-button" id="search"></button>
+        </form> 
+      </div>
+    </section>   
+
+<!-- main -->
+    <main class="main-container"> 
+      
+      <div class="mrt-list-container">
+        <button class="mrt-list-button-left"></button>
+        <div class="mrt-list font-body-med16-gray" id="mrt-list"></div>
+        <button class="mrt-list-button-right"></button>
+      </div>
+
+      <div class="attractions-container" id="attractions-container"></div>
+
+    </main>  
+
+<!-- footer -->
+    <footer class="footer font-body-bold16-white" style="color: white;">
+    COPYRIGHT © 2021 台北一日遊
+    </footer>
   
+  <script src="/static/mrtlist_handler.js" defer></script>
+  <script src="/static/attractions_handler.js" defer></script>
 </body>
+
 </html>
