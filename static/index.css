@@ -7,12 +7,15 @@ body{
 
 /* 導覽列容器 */
 .navigation-container{
+    background-color: white;
     width: 100%; 
     height: 54px;
-
+    position: fixed;
+    top: 0;
+    z-index: 1000;
     display: flex;
-    justify-content: center; /* 水平居中 */
-    align-items: center; /* 垂直居中 */  
+    justify-content: center; 
+    align-items: center; 
 }
 
 /* 導覽列文字區塊最大寬度 */
@@ -21,8 +24,8 @@ body{
     height: 34px;
     padding: 10px;
     display: flex;
-    align-items: center; /* 垂直居中 */  
-    justify-content: space-between; /* 左右側 */
+    align-items: center; 
+    justify-content: space-between; 
 }
 
 /* 導覽列右側 */
