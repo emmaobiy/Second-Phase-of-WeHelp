@@ -1,6 +1,6 @@
 let page=0;
 let keyword='';
-
+let Fetching = false;
 
 async function fetchAttractions(){
     try{
@@ -75,13 +75,18 @@ function addAttraction(attractions) {
 
 
 function handleScroll(){
+    if (Fetching) return; 
+
     const scrollTop=(document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
     const scrollHeight=(document.documentElement && document.documentElement.scrollHeight) || document.body.scrollHeight;
     const clientHeight=document.documentElement.clientHeight || window.innerHeight;
     const scrolledToBottom=Math.ceil(scrollTop + clientHeight) >= scrollHeight;
 
     if (scrolledToBottom) {
-        fetchAttractions();
+        Fetching=true; 
+        fetchAttractions().then(() => {
+            Fetching=false; 
+        });
     }
 }
 
