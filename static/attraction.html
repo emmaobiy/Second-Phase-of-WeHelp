@@ -4,8 +4,101 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Attraction</title>
+  <link rel="stylesheet" type="text/css"  href="/static/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap">
 </head>
+
 <body>
-  
+  <!-- navigation -->
+  <nav class="navigation-container">
+    <nav class="nav-min-container font-header1-bold30"><a href="/">台北一日遊</a>
+      
+      <div class="nav-right">
+        <div class="nav-button font-body-med16-gray" id="reservation">預定行程</div>
+        <div class="nav-button font-body-med16-gray" id="login-signup">登入/註冊</div>
+      </div>
+    </nav>
+  </nav>  
+
+
+  <!-- section -->
+  <div class="attraction-section-container font-body-med16-gray">
+    
+    <div id="attraction-picture-container" class="attraction-picture-container">
+      <button id="attraction-picture-button-left" class="attraction-picture-button-left"></button>
+      <button id="attraction-picture-button-right" class="attraction-picture-button-right"></button>
+      <button id="attraction-picture-buttons-circle-container" class="attraction-picture-button-circle-container"></button>
+    </div>
+
+
+    <div class="attraction-profile-container">
+      <div id="attraction-name" class="font-header3-bold24"></div>
+      <div id="attraction-cat-mrt"></div>
+      
+      <div class="attraction-booking-form-container">
+        <div class="attraction-booking-item font-body-bold16-gray">訂購導覽行程</div>
+        <div class="attraction-booking-item ">以此景點為中心的一日行程，帶您探索城市角落故事</div>
+        
+        <form id="booking-form">
+          
+          <div class="attraction-booking-item">
+            <label class="font-body-bold16-gray" for="date" > 選擇日期：</label>
+            <input class="attraction-booking-date-button" type="date" id="date" name="date"required>
+          </div>  
+
+          <div class="attraction-booking-item">
+            <span class="font-body-bold16-gray" for="time"> 選擇時間：</span>
+           
+            <label for="morning" class="attraction-booking-label">
+              <input class="attraction-booking-time-button" type="radio" id="morning" name="time" value="morning" required> 上半天
+            </label>
+        
+            <label for="afternoon" class="attraction-booking-label">
+              <input class="attraction-booking-time-button" type="radio" id="afternoon" name="time" value="afternoon" required> 下半天
+            </label>
+          </div>
+
+          <div class="attraction-booking-item">
+            <spqn class="font-body-bold16-gray"> 導覽費用：</spqn>
+            <span class="attraction-booking-price" id="cost"></span>          
+          </div>
+
+          <button class="attraction-booking-sumit"  type="submit" id="start-booking">開始預約行程</button>
+        </form>
+
+
+
+      </div>
+
+    </div>
+
+  </div>
+    
+  <hr class="hr">
+
+  <!-- info -->
+  <div class="attraction-info-container font-body-reg16-gray">
+    
+    <div id="attraction-introduction" class="attraction-info"></div>
+    
+    <div class="attraction-info">
+      <div class="font-body-bold16-gray">景點地址：</div>
+      <div id="attraction-address"></div>
+    </div>
+
+    <div class="attraction-info">
+      <div class="font-body-bold16-gray">交通方式：</div>
+      <div id="attraction-transportation"></div>
+    </div>
+
+  </div>
+
+  <!-- footer -->
+  <footer class="footer font-body-bold16-white" style="color: white;">
+    COPYRIGHT © 2021 台北一日遊
+  </footer>
+
+  <script src="/static/attraction_details_handler.js" defer></script>
+  <script src="/static/attraction_details_booking.js" defer></script>
 </body>
 </html>

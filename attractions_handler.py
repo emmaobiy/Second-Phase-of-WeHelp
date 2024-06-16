@@ -12,6 +12,9 @@ async def get_attractions(page:int=0, keyword: Optional[str] = None):
     cursor=connection.cursor(dictionary=True)
 
     try:
+        #設置GROUP_CONCAT max_len
+        cursor.execute("SET SESSION group_concat_max_len = 1000000;")
+
         limit=12
         offset=page * limit
 
@@ -82,6 +85,9 @@ async def get_attraction_by_id(attractionId:int):
     cursor = connection.cursor(dictionary=True)
         
     try:
+        #設置GROUP_CONCAT max_len
+        cursor.execute("SET SESSION group_concat_max_len = 1000000;")
+
         query="""
             SELECT a.id, a.name, a.description, a.address, a.transport, 
                 a.longitude, a.latitude, m.mrt, c.cat, 
